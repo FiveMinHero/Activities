@@ -16,38 +16,33 @@
     <h1>Student Organization - Check Request Form</h1>
     <form>
         Request for payment to:<br>
-        <input type="text" name="RequestPayment"><br>
+        <input id="RequestPayment" type="text" name="RequestPayment"><br>
         <br>
         Amount to be paid:<br>
-        <input type="text" name="AmountPaid"><br>
+        <input id="AmountPaid" type="text" name="AmountPaid"><br>
         <br>
         Reason for request:<br>
-        <input type="text" name="Reason"><br>
+        <input id="Reason" type="text" name="Reason"><br>
         <br>
         Individual requesting check:<br>
-        <input type="text" name="IndividualRequesting"><br>
+        <input id="IndividualRequesting" type="text" name="IndividualRequesting"><br>
         <br>
         Organization to be charged:<br>
-        <input type="text" name="OrgToBeCharged"><br>
+        <input id="OrgToBeCharged" type="text" name="OrgToBeCharged"><br>
         <br>
         Indicated what date this check is needed:<br>
-        <input type="text" name="DateCheckNeeded"><br>
+        <input id="DateCheckNeeded" type="text" name="DateCheckNeeded"><br>
         <br>
-        2nd signature for approval:<br>
-        <input type="text" name="SecondSignature"><br>
+        Second signature for approval:<br>
+        <input id="SecondSignature" type="text" name="SecondSignature"><br>
         <br>
         Date:<br>
-        <input type="text" name="Date"><br>
+        <input id="Date" type="text" name="Date"><br>
         <br>
         Comments:<br>
-        <input type="text" name="Comments"><br>
+        <input id="Comments" type="text" name="Comments"><br>
         <br>
-        <p>Please allow up to 48 hours of processing.</p>  
-        <p>--------------------------------------------------------------------------</p>
-        <p>Request approved by:______________________________   Date:________________</p>
-        <p>Check#:________________________ Date issued:_________________</p>
-        <p>Date mailed/picked up:_________________________</p>
-        
+        <input type="button" onclick="sendMail();" value="Click to send email">
     </form>
 
     <!-- Optional JavaScript -->
@@ -55,6 +50,35 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+    <script>
+        function sendMail() {
+            var requestPayment = document.getElementById("RequestPayment").value;
+            var amountPaid = document.getElementById("AmountPaid").value;
+            var reason = document.getElementById("Reason").value;
+            var individualRequesting = document.getElementById("IndividualRequesting").value;
+            var orgToBeCharged = document.getElementById("OrgToBeCharged").value;
+            var dateCheckNeeded = document.getElementById("DateCheckNeeded").value;
+            var secondSignature = document.getElementById("SecondSignature").value;
+            var date = document.getElementById("Date").value;
+            var comments = document.getElementById("Comments").value;
+
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "ca17@students.ptcollege.edu",
+                Password: "4259ce4e-284a-4cc6-8ca2-c08326ec3593",
+                To: "JDW41@students.ptcollege.edu",
+                From: "ca17@students.ptcollege.edu",
+                Subject: "Check Request Form",
+                Body: "Request for payment to: " + requestPayment + "\n Amount to be paid: " +
+                    amountPaid + "\n Reason for request: " + reason + "\n Individual requesting check: " + individualRequesting + "\n Organization to be charged: " + orgToBeCharged + "\n Indicated what date this check is needed: " + dateCheckNeeded + "\n Second signature for approval: " + secondSignature + "\n Date: " + date + "\n Comments: " + comments
+            }).then(
+                message => alert(message)
+            );
+        }
+
+    </script>
 </body>
 
 </html>

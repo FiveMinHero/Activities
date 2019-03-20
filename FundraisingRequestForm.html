@@ -16,34 +16,29 @@
     <h1>Student Organization - Fundraising Request Form</h1>
     <form>
         Name of organization:<br>
-        <input type="text" name="OrgName"><br>
+        <input id="nameOfOrg" type="text" name="OrgName"><br>
         <br>
         Contact person and email:<br>
-        <input type="text" name="ContactPerson"><br>
+        <input id="contactPersonAndEmail" type="text" name="ContactPerson"><br>
         <br>
         Proposed dates of fundraiser:<br>
-        <input type="text" name="ProposedDates"><br>
+        <input id="proposedDatesOfFundraiser" type="text" name="ProposedDates"><br>
         <br>
         Description of fundraiser:<br>
-        <input type="text" name="Description"><br>
+        <input id="descriptionOfFundraiser" type="text" name="Description"><br>
         <br>
         Location of fundraiser:<br>
-        <input type="text" name="Location"><br>
+        <input id="locationOfFundraiser" type="text" name="Location"><br>
         <br>
         What are the funds being raised for:<br>
-        <input type="text" name="FundsBeingRaisedFor"><br>
+        <input id="whatAreFundsBeingRaisedFor" type="text" name="FundsBeingRaisedFor"><br>
         <br>
         Estimated upfront cost to organization:<br>
-        <input type="text" name="EstimatedCost"><br>
+        <input id="estimatedCostToOrg" type="text" name="EstimatedCost"><br>
         <br>
         Advisor's Signature:<br>
-        <input type="text" name="AdvisorSignature"><br>
+        <input id="advisorSignature" type="text" name="AdvisorSignature"><br>
         <br>
-        <p>--------------------------------------------------------------------------</p>
-        <p>Student Activities:______________________________ Date:_________________</p>
-        <p>Approved:________________________ Not Approved/Reason:____________________</p>
-        <p>Fundraiser Dates:_________________________</p>
-
     </form>
 
     <!-- Optional JavaScript -->
@@ -51,6 +46,33 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+    <script>
+        function sendMail() {
+            var nameOfOrg = document.getElementById("nameOfOrg").value;
+            var contactPersonAndEmail = document.getElementById("contactPersonAndEmail").value;
+            var proposedDatesOfFundraiser = document.getElementById("proposedDatesOfFundraiser").value;
+            var descriptionOfFundraiser = document.getElementById("descriptionOfFundraiser").value;
+            var locationOfFundraiser = document.getElementById("locationOfFundraiser").value;
+            var whatAreFundsBeingRaisedFor = document.getElementById("whatAreFundsBeingRaisedFor").value;
+            var EstimatedCostToOrg = document.getElementById("estimatedCostToOrg").value;
+            var advisorSignature = document.getElementById("advisorSignature").value;
+
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "ca17@students.ptcollege.edu",
+                Password: "4259ce4e-284a-4cc6-8ca2-c08326ec3593",
+                To: "JDW41@students.ptcollege.edu",
+                From: "ca17@students.ptcollege.edu",
+                Subject: "FundraisingRequestForm",
+                Body: "Name of Organization: " + nameOfOrg + "\nContact person and email: " + contactPersonAndEmail + "\nProposed dates of fundraiser: " + proposedDatesOfFundraiser + "\nDescription of fundraiser: " + descriptionOfFundraiser + "\nLocation of fundraiser: " + locationOfFundraiser + "\nWhat are the funds being raised for: " + whatAreFundsBeingRaisedFor + "\nEstimated upfront cost to organization: " + EstimatedCostToOrg + "\nAdvisor's Signature: " + advisorSignature
+            }).then(
+                message => alert(message)
+            );
+        }
+
+    </script>
 </body>
 
 </html>
